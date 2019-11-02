@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Navigation } from "../components/Navigation";
 import apiKey from "../apiKey";
 import Card from 'react-bootstrap/Card'
+import { Col, Row, Container } from 'react-bootstrap';
 
 function sortByDate(a,b){
     return new Date(a.date_begin).getTime() - new Date(b.date_begin).getTime();
@@ -39,7 +40,7 @@ class EventsPage extends Component {
             let elems = [];
             for (let ii = 0; ii < this.state.listings.length; ii++) {
                 elems.push(
-                    <Card key={ii}>
+                    <Card key={ii} className='events-cards'>
                         <Card.Body>
                             <Card.Title>{this.state.listings[ii]["title"]}</Card.Title>
                             <Card.Text>{this.state.listings[ii]["date_begin"]}</Card.Text>
@@ -49,11 +50,27 @@ class EventsPage extends Component {
             }
 
 
-            return <div>
-                <h1>Events</h1>
-                {elems}
-                <Navigation />
-            </div>
+            return (
+                <div>
+                    <Container className='events-container'>
+                        <Row >
+                            <Col>
+                                <div className="events-text">EVENTS</div>
+                            </Col>
+                        </Row>
+                        <Row className='events-panel'>
+                            <Col>
+                                {elems}
+                            </Col>
+                        </Row>
+                        <Row >
+                            <Col>
+                                <Navigation/>
+                            </Col>
+                        </Row>
+                    </Container>
+                </div>
+            )
         } else {
             return <div>
                 <p>Loading...</p>
