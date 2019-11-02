@@ -81,3 +81,25 @@
   padding-top: 20px;
 }
 
+/** Events Page UI **/
+
+.events-text {
+  color: #007bff;
+  font-size: 30px;
+  padding-top: 30px;
+  padding-bottom: 10px;
+}
+
+.events-cards {
+  margin-bottom: 20px;
+}
+
+.events-container {
+  height: 100%;
+  position: absolute;
+}
+
+.events-panel {
+  height: 80%;
+  overflow: scroll;
+}
