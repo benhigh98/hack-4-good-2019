@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import { Navigation } from "../components/Navigation";
-
 import apiKey from '../apiKey';
-import ReactDOM from 'react-dom'
 
 class SearchResultsPage extends Component {
     state = {
