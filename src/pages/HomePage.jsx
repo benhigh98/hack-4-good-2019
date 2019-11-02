@@ -1,10 +1,11 @@
 import React from 'react';
 import { Navigation } from "../components/Navigation";
+import LocationEntry from '../components/LocationEntry';
 
 function HomePage() {
     return (
         <div>
-            <h1>Home Page</h1>
+            <LocationEntry />
             <Navigation />
         </div>
     );
