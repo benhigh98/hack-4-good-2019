@@ -20,3 +20,11 @@
 .App-link {
   color: #09d3ac;
 }
+
+.nav {
+  display: flex;
+}
+
+.navButton {
+  flex: 1;
+}
