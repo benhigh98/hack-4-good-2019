@@ -48,7 +48,6 @@ class SearchResultsPage extends Component {
             </div>
         }
     }
-
 }
 
 export default SearchResultsPage;

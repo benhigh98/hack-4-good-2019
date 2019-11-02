@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import { Navigation } from "../components/Navigation";
 import apiKey from "../apiKey";
 import Card from 'react-bootstrap/Card'
-import Accordion from 'react-bootstrap/Accordion'
 
 function sortByDate(a,b){
     return new Date(a.date_begin).getTime() - new Date(b.date_begin).getTime();
