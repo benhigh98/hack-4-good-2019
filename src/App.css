@@ -62,3 +62,22 @@
   margin-left: .5em;
 }
 
+/** Details Page **/
+.nopad {
+  padding-left:0px!important;
+  padding-right:0px!important;
+}
+
+.nomarg {
+  margin:auto;
+  display:block;
+}
+
+.center {
+  text-align:center;
+}
+
+.topPad {
+  padding-top: 20px;
+}
+
