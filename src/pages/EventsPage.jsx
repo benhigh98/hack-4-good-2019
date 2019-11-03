@@ -3,6 +3,7 @@ import { Navigation } from "../components/Navigation";
 import apiKey from "../apiKey";
 import Card from 'react-bootstrap/Card'
 import { Col, Row, Container } from 'react-bootstrap';
+import Spinner from 'react-bootstrap/Spinner'
 
 function sortByDate(a,b){
     return new Date(a.date_begin).getTime() - new Date(b.date_begin).getTime();
@@ -73,7 +74,9 @@ class EventsPage extends Component {
             )
         } else {
             return <div>
-                <p>Loading...</p>
+                import Spinner from 'react-bootstrap/Spinner'
+                <div className="d-flex justify-content-center events-text">Loading...</div>
+                <div className="d-flex justify-content-center"><Spinner animation="border" variant="primary" /></div>
             </div>
         }
     }
