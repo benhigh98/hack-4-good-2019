@@ -84,7 +84,7 @@ class SearchResultsPage extends Component {
                             {mapElems}
                         </GoogleMapReact>
                     </div>
-                    <Container>
+                    <Container id="resultsList">
                         <Row className='results-header'>
                             <Col xs={10}>
                                 <div>Results</div>
