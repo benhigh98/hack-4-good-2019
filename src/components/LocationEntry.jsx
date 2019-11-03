@@ -89,8 +89,9 @@ class LocationEntry extends React.Component {
                             <div className='separator d-flex'>OR</div>
                             <Form>
                                 <Form.Group controlId="formAddress">
-                                    <InputGroup>
+                                    <InputGroup className='mx-auto autocomplete-holder' >
                                         <Autocomplete
+                                            className='autocomplete-box'
                                             id="address"
                                             type="text"
                                             placeholder="Enter Addresss"
