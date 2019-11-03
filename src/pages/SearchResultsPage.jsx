@@ -5,7 +5,7 @@ import SearchResult from "../components/SearchResult";
 import GoogleMapReact from 'google-map-react';
 import {Col, Row, Container} from "react-bootstrap";
 import SettingsIcon from '../Icons/SettingsApplications24Px';
-import Spinner from "./EventsPage";
+import Spinner from 'react-bootstrap/Spinner'
 
 class SearchResultsPage extends Component {
     state = {
@@ -117,7 +117,8 @@ class SearchResultsPage extends Component {
                     </GoogleMapReact>
                 </div>
                 <div id="loadingArea">
-                    <h3>Loading results...</h3>
+                    <div className="d-flex justify-content-center events-text">Loading...</div>
+                    <div className="d-flex justify-content-center"><Spinner animation="border" variant="primary" /></div>
                 </div>
                 <Navigation />
             </div>
