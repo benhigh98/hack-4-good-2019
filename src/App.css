@@ -81,13 +81,24 @@
   height: inherit;
 }
 
-
 #settingsImage img {
     height: 100%;
 }
 
 .searchResult {
     color: black;
+}
+
+.results-header {
+  color: #007bff;
+  font-size: 30px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+
+.settings-icon {
+  width: 100%;
+  height: auto;
 }
 
 /** Details Page **/
@@ -118,7 +129,7 @@
   padding-bottom: 10px;
 }
 
-.events-cards {
+.events-cards, .search-results-cards {
   margin-bottom: 20px;
 }
 
