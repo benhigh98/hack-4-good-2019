@@ -113,8 +113,6 @@ class DetailsPage extends Component {
             });
     };
 
-    iframe = "https://www.google.com/maps/embed/v1/place?q=" + "2" + "," + "2" + "&key=" + apiKey.maps;
-
     getApiData = async function() {
         const response = await fetch("https://jobs.api.sgf.dev/api/job?api_token=" + apiKey.hack4good);
         const json = await response.json();
@@ -149,13 +147,15 @@ class DetailsPage extends Component {
                     </div>
                 )
             } else {
+                let iframe = "https://www.google.com/maps/embed/v1/place?q=" + this.state.job["locations"]["data"][0]["lat"]
+                    + "," + this.state.job["locations"]["data"][0]["lng"] + "&key=" + apiKey.maps;
 
                 return (
                     <div>
                         <Container fluid>
                             <Row className="">
                                 <Col className="p-0">
-                                    <iframe className="w-100" id="map" src={this.iframe}></iframe>
+                                    <iframe className="w-100" id="map" src={iframe}></iframe>
                                 </Col>
                             </Row>
                         </Container>
