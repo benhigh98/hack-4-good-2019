@@ -158,6 +158,11 @@
   overflow: scroll;
 }
 
+.spinner-width {
+  width:10rem;
+  height:10rem;
+}
+
 /** Favorites Page UI **/
 
 .favorites-text {

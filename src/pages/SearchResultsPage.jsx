@@ -12,8 +12,9 @@ class SearchResultsPage extends Component {
         listings: []
     };
 
-    lat = 37.219366;
-    lon = -93.285162;
+    loc = JSON.parse(localStorage.getItem("userLocation"));
+    lat = this.loc.latitude;
+    lon = this.loc.longitude;
     limit = 16093.44; // 10 miles in meters
 
     getApiData = async function() {
@@ -58,6 +59,8 @@ class SearchResultsPage extends Component {
     }
 
     render() {
+        let loc = JSON.parse(localStorage.getItem("userLocation"));
+
         if (this.state.done) {
             let elems = [];
             let mapElems = [];
@@ -71,8 +74,7 @@ class SearchResultsPage extends Component {
                               </a>);
                 elems.push(<SearchResult key={this.state.listings[i].id} job={this.state.listings[i]}> </SearchResult>);
             }
-
-            return ( 
+            return (
                 <div>
                     <div style={{ height: '50vh', width: '100%' }}>
                         <GoogleMapReact
