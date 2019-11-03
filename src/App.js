@@ -6,6 +6,7 @@ import FavoritesPage from "./pages/FavoritesPage";
 import DetailsPage from "./pages/DetailsPage";
 import EventsPage from "./pages/EventsPage";
 import SearchResultsPage from "./pages/SearchResultsPage";
+import SettingsPage from "./pages/SettingsPage";
 import SplashPage from "./pages/SplashPage";
 import NotificationsPage from "./pages/NotificationsPage";
 
@@ -18,6 +19,7 @@ function App() {
           <Route exact path="/details" component={DetailsPage} />
           <Route exact path="/events" component={EventsPage} />
           <Route exact path="/results" component={SearchResultsPage} />
+          <Route exact path="/settings" component={SettingsPage} />
           <Route exact path="/notifications" component={NotificationsPage} />
       </Switch>
   );

@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import { Navigation } from "../components/Navigation";
 import apiKey from '../apiKey';
+import SearchResult from "../components/SearchResult";
+import GoogleMapReact from 'google-map-react';
+import {Col, Row} from "react-bootstrap";
 
 class SearchResultsPage extends Component {
     state = {
@@ -8,13 +11,13 @@ class SearchResultsPage extends Component {
         listings: []
     };
 
+    lat = 37.219366;
+    lon = -93.285162;
+    limit = 16093.44; // 10 miles in meters
+
     getApiData = async function() {
         const response = await fetch("https://jobs.api.sgf.dev/api/job?api_token=" + apiKey.hack4good);
         const json = await response.json();
-
-        const lat = 37.219366;
-        const lon = -93.285162;
-        const limit = 16093.44; // 10 miles in meters
 
         const validLocations = [];
 
@@ -22,10 +25,10 @@ class SearchResultsPage extends Component {
             let added = false; // if the job has been added to the list
             for (let loc of job.locations.data) {
                 let R = 6371e3; // metres
-                let lat1rads = lat * (Math.PI / 180);
+                let lat1rads = this.lat * (Math.PI / 180);
                 let lat2rads = loc.lat * (Math.PI / 180);
-                let deltaLat = (loc.lat - lat) * (Math.PI / 180);
-                let deltaLon = (loc.lng - lon) * (Math.PI / 180);
+                let deltaLat = (loc.lat - this.lat) * (Math.PI / 180);
+                let deltaLon = (loc.lng - this.lon) * (Math.PI / 180);
 
                 let a = Math.sin(deltaLat / 2) * Math.sin(deltaLat / 2) +
                     Math.cos(lat1rads) * Math.cos(lat2rads) *
@@ -33,7 +36,7 @@ class SearchResultsPage extends Component {
                 let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
                 loc["distance"] = R * c;
 
-                if (loc["distance"] <= limit && !added) {
+                if (loc["distance"] <= this.limit && !added) {
                     added = true;
                     validLocations.push(job);
                 }
@@ -56,17 +59,59 @@ class SearchResultsPage extends Component {
     render() {
         if (this.state.done) {
             let elems = [];
+            let mapElems = [];
             for (let i = 0; i < this.state.listings.length; i++) {
-                elems.push(<div key={i}>{this.state.listings[i]["employer"]["name"]} - {this.state.listings[i]["title"]} - {this.state.listings[i].locations.data[0].lat}, {this.state.listings[i].locations.data[0].lng} - {this.state.listings[i].locations.data[0].distance * 0.000621371} miles<hr /></div>)
+                mapElems.push(<a href={"details?id=" + this.state.listings[i].id}
+                                 key={"map-item-" + i}
+                                 lat={this.state.listings[i].locations.data[0].lat}
+                                 lng={this.state.listings[i].locations.data[0].lng}>
+                                    <img src={require("../logos/room.svg")}
+                                    alt={this.state.listings[i].employer.name} />
+                              </a>);
+                elems.push(<SearchResult key={this.state.listings[i].id} job={this.state.listings[i]}> </SearchResult>);
             }
 
             return <div>
-                {elems}
+                <div style={{ height: '50vh', width: '100%' }}>
+                    <GoogleMapReact
+                        bootstrapURLKeys={{key: apiKey.maps}}
+                        defaultCenter={{lat: this.lat, lng: this.lon}}
+                        yesIWantToUseGoogleMapApiInternals
+                        defaultZoom={14}>
+                        <img alt="You are here" lat={this.lat} lng={this.lon} src={require("../logos/home.svg")} />
+                        {mapElems}
+                    </GoogleMapReact>
+                </div>
+                <div id="resultsList">
+                    <Row>
+                        <Col xs={10}>
+                            <h3 style={{marginBottom: 0}}>Results</h3>
+                        </Col>
+                        <Col xs={2} id="settingsImage">
+                            <a href="settings"><img src={require("../logos/settings_applications-24px.svg")} alt="Settings" /></a>
+                        </Col>
+                    </Row>
+
+                    {elems}
+                </div>
                 <Navigation />
             </div>
         } else {
             return <div>
-                <p>Loading...</p>
+                <div style={{ height: '50vh', width: '100%' }}>
+                    <GoogleMapReact
+                        bootstrapURLKeys={{key: apiKey.maps}}
+                        defaultCenter={{lat: this.lat, lng: this.lon}}
+                        yesIWantToUseGoogleMapApiInternals
+                        defaultZoom={14}>
+                        <img alt="Your Location" lat={this.lat} lng={this.lon} src={require("../logos/home.svg")} />
+                    </GoogleMapReact>
+                </div>
+                <div id="loadingArea">
+                    <h3>Loading results...</h3>
+                    <img className="loadingAnim" alt="Loading..." src={require("../logos/loading.gif")} />
+                </div>
+                <Navigation />
             </div>
         }
     }
