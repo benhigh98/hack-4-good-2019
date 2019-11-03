@@ -185,3 +185,18 @@
   height: 80%;
   overflow: scroll;
 }
+
+/** Notifications Page **/
+.notifications-page {
+  font-size: 40px;
+  padding-top: 50px;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.notifications-text {
+  color: #007bff;
+  font-size: 30px;
+  padding-top: 30px;
+  padding-bottom: 10px;
+}
