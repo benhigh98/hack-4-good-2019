@@ -7,13 +7,11 @@ import DetailsPage from "./pages/DetailsPage";
 import EventsPage from "./pages/EventsPage";
 import SearchResultsPage from "./pages/SearchResultsPage";
 import SettingsPage from "./pages/SettingsPage";
-import SplashPage from "./pages/SplashPage";
 import NotificationsPage from "./pages/NotificationsPage";
 
 function App() {
   return (
       <Switch>
-          <Route exact path="/" component={SplashPage} />
           <Route exact path="/home" component={HomePage} />
           <Route exact path="/favorites" component={FavoritesPage} />
           <Route exact path="/details" component={DetailsPage} />

@@ -1,6 +1,6 @@
 import { Navigation } from "../components/Navigation";
 import { Container, Row, Col } from 'react-bootstrap';
-import React from 'react';
+import React, {Component} from 'react';
 import apiKey from '../apiKey';
 
 // Extract employer name, id, title, locations
@@ -85,51 +85,86 @@ async function getTravelTimes(jobObj) {
     obj.timeByFoot = footTimeObj.rows[0]["elements"][0]["duration"]["text"];
 }
 
-function DetailsPage(props) {
+class DetailsPage extends Component {
 
-    let iframe = "https://www.google.com/maps/embed/v1/place?q=" + props.lat + "," + props.long + "&key=" + apiKey.maps;
+    iframe = "https://www.google.com/maps/embed/v1/place?q=" + "2" + "," + "2" + "&key=" + apiKey.maps;
 
-    return (
-        <div>
-            <Container fluid>
-                <Row className="">
-                    <Col className="p-0">
-                        <iframe className="w-100" id="map" src={iframe}></iframe>
-                    </Col>
-                </Row>
-            </Container>
+    state = {
+        done: false,
+        listings: []
+    };
 
-            <Container>
-                <Row>
-                    <Col><Row><img className="nomarg" src={require('../logos/walk.svg')}/></Row><Row><p
-                        className="nomarg">0.0</p></Row></Col>
-                    <Col><Row><img className="nomarg" src={require('../logos/car.svg')}/></Row><Row><p
-                        className="nomarg">0.0</p></Row></Col>
-                    <Col><Row><img className="nomarg" src={require('../logos/bike.svg')}/></Row><Row><p
-                        className="nomarg">0.0</p></Row></Col>
-                    <Col><Row><img className="nomarg" src={require('../logos/bus.svg')}/></Row><Row><p
-                        className="nomarg">0.0</p></Row></Col>
-                </Row>
-                <Row className="topPad">
-                    <Col>
-                        <h2>Job title</h2>
-                        <h5>Employer</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore
-                            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                            nisi ut
-                            aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-                            esse
-                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
-                            in
-                            culpa qui officia deserunt mollit anim id est laborum.</p>
-                    </Col>
-                </Row>
-            </Container>
+    getApiData = async function() {
+        const response = await fetch("https://jobs.api.sgf.dev/api/job?api_token=" + apiKey.hack4good);
+        const json = await response.json();
 
-            <Navigation/>
-        </div>
-    )
+        const validLocations = [];
+
+        for (let job of json.data) {
+            validLocations.push(job);
+        }
+
+        this.setState({listings: validLocations, done: true});
+    };
+
+    componentDidMount() {
+        this.getApiData();
+    }
+
+    render(){
+
+        if (this.state.done) {
+            let temp = Object.assign(this.props);
+            let json = JSON.parse(JSON.stringify(temp));
+            let id = json.location.search.replace("?id=", "");
+            let job = {}
+
+            for (let listing of this.state.listings) {
+                if(listing.id == id){
+                    job = listing;
+                }
+            }
+
+            return (
+                <div>
+                    <Container fluid>
+                        <Row className="">
+                            <Col className="p-0">
+                                <iframe className="w-100" id="map" src={this.iframe}></iframe>
+                            </Col>
+                        </Row>
+                    </Container>
+
+                    <Container>
+                        <Row>
+                            <Col><Row><img className="nomarg" src={require('../logos/walk.svg')}/></Row><Row><p
+                                className="nomarg">0.0</p></Row></Col>
+                            <Col><Row><img className="nomarg" src={require('../logos/car.svg')}/></Row><Row><p
+                                className="nomarg">0.0</p></Row></Col>
+                            <Col><Row><img className="nomarg" src={require('../logos/bike.svg')}/></Row><Row><p
+                                className="nomarg">0.0</p></Row></Col>
+                            <Col><Row><img className="nomarg" src={require('../logos/bus.svg')}/></Row><Row><p
+                                className="nomarg">0.0</p></Row></Col>
+                        </Row>
+                        <Row className="topPad">
+                            <Col>
+                                <h2>{job.title}</h2>
+                                <h5>{job.employer.name}</h5>
+                                <p>{job.description}</p>
+                            </Col>
+                        </Row>
+                    </Container>
+
+                    <Navigation/>
+                </div>
+            )
+        } else {
+            return <div>
+                    Loading...
+                </div>
+        }
+    }
+
 }
 
 export default DetailsPage;
