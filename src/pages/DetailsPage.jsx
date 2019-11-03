@@ -53,7 +53,7 @@ function unfavoriteJob(jobJSON) {
 async function getTravelTimes(jobObj) {
     // key:curLocation
     // value: Street Address City State (eg. 900 North Benton Ave Springfield MO)
-    var home = localStorage.getItem('curLocation');
+    var home = localStorage.getItem('userLocation');
 
     var obj = new Object();
     obj.timeByCar = "";
