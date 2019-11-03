@@ -3,7 +3,8 @@ import { Navigation } from "../components/Navigation";
 import apiKey from '../apiKey';
 import SearchResult from "../components/SearchResult";
 import GoogleMapReact from 'google-map-react';
-import {Col, Row} from "react-bootstrap";
+import {Col, Row, Container} from "react-bootstrap";
+import SettingsIcon from '../Icons/SettingsApplications24Px';
 
 class SearchResultsPage extends Component {
     state = {
@@ -79,32 +80,36 @@ class SearchResultsPage extends Component {
                               </a>);
                 elems.push(<SearchResult key={this.state.listings[i].id} job={this.state.listings[i]}> </SearchResult>);
             }
-
-            return <div>
-                <div style={{ height: '50vh', width: '100%' }}>
-                    <GoogleMapReact
-                        bootstrapURLKeys={{key: apiKey.maps}}
-                        defaultCenter={{lat: loc.latitude, lng: loc.longitude}}
-                        yesIWantToUseGoogleMapApiInternals
-                        defaultZoom={14}>
-                        <img alt="You are here" lat={loc.latitude} lng={loc.longitude} src={require("../logos/home.svg")} />
-                        {mapElems}
-                    </GoogleMapReact>
+            return (
+                <div>
+                    <div style={{ height: '50vh', width: '100%' }}>
+                        <GoogleMapReact
+                            bootstrapURLKeys={{key: apiKey.maps}}
+                            defaultCenter={{lat: loc.latitude, lng: loc.longitude}}
+                            yesIWantToUseGoogleMapApiInternals
+                            defaultZoom={14}>
+                            <img alt="You are here" lat={loc.latitude} lng={loc.longitude} src={require("../logos/home.svg")} />
+                            {mapElems}
+                        </GoogleMapReact>
+                    </div>
+                    <Container>
+                        <Row className='results-header'>
+                            <Col xs={10}>
+                                <div>Results</div>
+                            </Col>
+                            <Col >
+                                <a href="settings"><SettingsIcon fill='#007bff' className='settings-icon' viewBox={'0 0 25 25'}/></a>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                {elems}
+                            </Col>
+                        </Row>
+                    </Container>
+                    <Navigation />
                 </div>
-                <div id="resultsList">
-                    <Row>
-                        <Col xs={10}>
-                            <h3 style={{marginBottom: 0}}>Results</h3>
-                        </Col>
-                        <Col xs={2} id="settingsImage">
-                            <a href="settings"><img src={require("../logos/settings_applications-24px.svg")} alt="Settings" /></a>
-                        </Col>
-                    </Row>
-
-                    {elems}
-                </div>
-                <Navigation />
-            </div>
+            );
         } else {
             return <div>
                 <div style={{ height: '50vh', width: '100%' }}>
