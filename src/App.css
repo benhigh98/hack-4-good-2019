@@ -62,6 +62,21 @@
   margin-left: .5em;
 }
 
+.autocomplete-holder {
+  padding-left: 10px;
+  height: 40px;
+}
+
+.autocomplete-box {
+  width: 75%;
+  border: 1px solid lightgrey;
+  border-radius: 2px;
+}
+
+.autocomplete-box:focus {
+  outline-color: #007bff 
+}
+
 /* Search Results Page */
 #resultsList {
   height: 50vh;

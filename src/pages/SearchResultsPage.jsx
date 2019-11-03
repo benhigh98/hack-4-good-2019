@@ -12,9 +12,9 @@ class SearchResultsPage extends Component {
         listings: []
     };
 
-    loc = localStorage.getItem("userLocation");
-    lat = 37.219366;
-    lon = -93.285162;
+    loc = JSON.parse(localStorage.getItem("userLocation"));
+    lat = this.loc.latitude;
+    lon = this.loc.longitude;
     limit = 16093.44; // 10 miles in meters
 
     getApiData = async function() {
@@ -54,12 +54,6 @@ class SearchResultsPage extends Component {
         this.setState({listings: validLocations, done: true});
     };
 
-    getLocation = function() {
-        const loc = localStorage.getItem("userLocation");
-        this.lat = loc.latitude;
-        this.lon = loc.longitude;
-    }
-
     componentDidMount() {
         this.getApiData();
     }
@@ -85,10 +79,10 @@ class SearchResultsPage extends Component {
                     <div style={{ height: '50vh', width: '100%' }}>
                         <GoogleMapReact
                             bootstrapURLKeys={{key: apiKey.maps}}
-                            defaultCenter={{lat: loc.latitude, lng: loc.longitude}}
+                            defaultCenter={{lat: this.lat, lng: this.lon}}
                             yesIWantToUseGoogleMapApiInternals
                             defaultZoom={14}>
-                            <img alt="You are here" lat={loc.latitude} lng={loc.longitude} src={require("../logos/home.svg")} />
+                            <img alt="You are here" lat={this.lat} lng={this.lon} src={require("../logos/home.svg")} />
                             {mapElems}
                         </GoogleMapReact>
                     </div>
@@ -115,10 +109,10 @@ class SearchResultsPage extends Component {
                 <div style={{ height: '50vh', width: '100%' }}>
                     <GoogleMapReact
                         bootstrapURLKeys={{key: apiKey.maps}}
-                        defaultCenter={{lat: loc.latitude, lng: loc.longitude}}
+                        defaultCenter={{lat: this.lat, lng: this.lon}}
                         yesIWantToUseGoogleMapApiInternals
                         defaultZoom={14}>
-                        <img alt="Your Location" lat={loc.latitude} lng={loc.longitude} src={require("../logos/home.svg")} />
+                        <img alt="Your Location" lat={this.lat} lng={this.lon} src={require("../logos/home.svg")} />
                     </GoogleMapReact>
                 </div>
                 <div id="loadingArea">
