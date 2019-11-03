@@ -5,6 +5,7 @@ import SearchResult from "../components/SearchResult";
 import GoogleMapReact from 'google-map-react';
 import {Col, Row, Container} from "react-bootstrap";
 import SettingsIcon from '../Icons/SettingsApplications24Px';
+import Spinner from "./EventsPage";
 
 class SearchResultsPage extends Component {
     state = {
@@ -117,7 +118,6 @@ class SearchResultsPage extends Component {
                 </div>
                 <div id="loadingArea">
                     <h3>Loading results...</h3>
-                    <img className="loadingAnim" alt="Loading..." src={require("../logos/loading.gif")} />
                 </div>
                 <Navigation />
             </div>

@@ -1,11 +1,17 @@
 import { Navigation } from "../components/Navigation";
 import { Container, Row, Col } from 'react-bootstrap';
 import React, {Component} from 'react';
+import Button from 'react-bootstrap/Button'
 import apiKey from '../apiKey';
 
 
 class DetailsPage extends Component {
 
+    constructor (props){
+        super(props);
+
+        this.favoriteJob = this.favoriteJob.bind(this);
+    }
 
     state = {
         done: false,
@@ -30,12 +36,15 @@ class DetailsPage extends Component {
         return obj
     }
 
-    favoriteJob = function(jobJSON) {
-        var favoritesList = localStorage.getItem('favorites');
+    favoriteJob = function() {
+        let favoritesList = localStorage.getItem('favorites');
+
+        let jobJSON = this.state.job;
+        console.log(this.state.job);
 
         if (favoritesList === null) {
-            favoritesList = JSON.stringify([jobJSON]);
-            localStorage.setItem('favorites', favoritesList);
+            favoritesList = jobJSON;
+            localStorage.setItem('favorites', JSON.stringify(favoritesList));
         }
 
         else {
@@ -46,8 +55,8 @@ class DetailsPage extends Component {
             }
             // Otherwise add it to the end of the string
             else {
-                favoritesList.push(jobJSON);
-                localStorage.setItem('favorites', JSON.stringify(favoritesList));
+                let temp = favoritesList.toString() + jobJSON.toString();
+                localStorage.setItem('favorites', JSON.parse(temp));
             }
         }
     }
@@ -166,6 +175,13 @@ class DetailsPage extends Component {
                                 <Col>
                                     <h2>{this.state.job.title}</h2>
                                     <h5>{this.state.job.employer.name}</h5>
+                                </Col>
+                                <Col>
+                                    <Button onClick={this.favoriteJob} variant="primary">Favorite</Button>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
                                     <p>{this.state.job.description}</p>
                                 </Col>
                             </Row>
