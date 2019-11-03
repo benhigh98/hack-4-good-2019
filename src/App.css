@@ -63,12 +63,12 @@
 }
 
 .autocomplete-holder {
-  padding-left: 10px;
   height: 40px;
 }
 
 .autocomplete-box {
   width: 75%;
+  padding-left: 15px;
   border: 1px solid lightgrey;
   border-radius: 2px;
 }

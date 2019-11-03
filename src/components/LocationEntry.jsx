@@ -94,7 +94,7 @@ class LocationEntry extends React.Component {
                                             className='autocomplete-box'
                                             id="address"
                                             type="text"
-                                            placeholder="Enter Addresss"
+                                            placeholder="Enter Address"
                                             aria-describedby="inputGroupAppend"
                                         />
                                         <InputGroup.Append>
