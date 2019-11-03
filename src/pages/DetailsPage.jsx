@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import React, {Component} from 'react';
 import Button from 'react-bootstrap/Button'
 import apiKey from '../apiKey';
-
+import Spinner from 'react-bootstrap/Spinner'
 
 class DetailsPage extends Component {
 
@@ -193,7 +193,8 @@ class DetailsPage extends Component {
             }
         } else {
             return <div>
-                    Loading...
+                    <div className="d-flex justify-content-center events-text">Loading...</div>
+                    <div className="d-flex justify-content-center"><Spinner animation="border" variant="primary" /></div>
                 </div>
         }
     }
