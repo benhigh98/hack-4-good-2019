@@ -131,3 +131,26 @@
   height: 80%;
   overflow: scroll;
 }
+
+/** Favorites Page UI **/
+
+.favorites-text {
+  color: #007bff;
+  font-size: 30px;
+  padding-top: 30px;
+  padding-bottom: 10px;
+}
+
+.favorites-cards {
+  margin-bottom: 20px;
+}
+
+.favorites-container {
+  height: 100%;
+  position: absolute;
+}
+
+.favorites-panel {
+  height: 80%;
+  overflow: scroll;
+}
