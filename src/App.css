@@ -62,6 +62,34 @@
   margin-left: .5em;
 }
 
+/* Search Results Page */
+#resultsList {
+  height: 50vh;
+  overflow: scroll !important;
+}
+
+#loadingArea {
+  text-align: center;
+}
+
+.loadingAnim {
+  width: 50%;
+}
+
+#settingsImage {
+  text-align: right;
+  height: inherit;
+}
+
+
+#settingsImage img {
+    height: 100%;
+}
+
+.searchResult {
+    color: black;
+}
+
 /** Details Page **/
 .nopad {
   padding-left:0px!important;
