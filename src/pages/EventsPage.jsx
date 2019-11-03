@@ -74,7 +74,6 @@ class EventsPage extends Component {
             )
         } else {
             return <div>
-                import Spinner from 'react-bootstrap/Spinner'
                 <div className="d-flex justify-content-center events-text">Loading...</div>
                 <div className="d-flex justify-content-center"><Spinner animation="border" variant="primary" /></div>
             </div>
