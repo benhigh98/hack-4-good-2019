@@ -24,7 +24,7 @@ class FavoritesPage extends Component {
             var favoritesList = localStorage.getItem('favorites');
             this.setState(
                 {done: true,
-                    favorites: JSON.parse(favoritesList)}
+                    favorites: [JSON.parse(favoritesList)]}
             );
         }
 
@@ -36,14 +36,15 @@ class FavoritesPage extends Component {
     }
 
     render() {
-        if (this.state.done && this.state.favorites) {
+        console.log(this.state.favorites);
+        if (this.state.done && this.state.favorites !== null) {
             let cardElements = [];
             for (let i = 0; i < this.state.favorites.length; i++) {
                 cardElements.push(
                     <Card key={i} className='favorites-cards'>
                         <Card.Body>
-                            <Card.Title>{this.state.favorites[i]["jobTitle"]}</Card.Title>
-                            <Card.Text>{this.state.favorites[i]["employerName"]}</Card.Text>
+                            <Card.Title>{this.state.favorites[i]["title"]}</Card.Title>
+                            <Card.Text>{this.state.favorites[i]["employer"].name}</Card.Text>
                         </Card.Body>
                     </Card>
                 )
